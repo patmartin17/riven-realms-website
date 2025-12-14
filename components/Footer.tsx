@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 
 export function Footer() {
   return (
@@ -94,26 +95,21 @@ export function Footer() {
 
         {/* Logo Section */}
         <div className="flex justify-center mb-10">
-          <div className="text-center">
-            {/* Stylized Logo */}
-            <div className="flex items-center justify-center gap-1 mb-2">
-              <svg className="w-12 h-12 text-[#8a9bae]" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L8 6H4v4l-4 4 4 4v4h4l4 4 4-4h4v-4l4-4-4-4V6h-4l-4-4zm0 3.5L14.5 8H16v1.5L18.5 12 16 14.5V16h-1.5L12 18.5 9.5 16H8v-1.5L5.5 12 8 9.5V8h1.5L12 5.5z"/>
-              </svg>
-            </div>
-            <h2 className="font-cinzel text-2xl font-bold tracking-[0.3em] text-[#8a9bae] uppercase">
-              Hytale
-            </h2>
-            <p className="font-cinzel text-xs tracking-[0.5em] text-[#5a6a7a] uppercase mt-1">
-              Highlights
-            </p>
-          </div>
+          <Link href="/" className="block transition-transform hover:scale-105">
+            <Image
+              src="/images/desktop/logo.png"
+              alt="Riven Realms"
+              width={200}
+              height={200}
+              className="w-[100px] h-auto drop-shadow-lg opacity-80 hover:opacity-100 transition-opacity"
+            />
+          </Link>
         </div>
 
         {/* Links Row */}
         <div className="flex flex-wrap items-center justify-center gap-x-1 gap-y-2 mb-8 px-4">
           <Link href="/about" className="text-[#6a7a8a] hover:text-[#c77dff] text-xs font-cinzel uppercase tracking-wider transition-colors px-3">
-            About & Contact
+            About Us
           </Link>
           <span className="text-[#3a4a5a]">|</span>
           <Link href="/terms" className="text-[#6a7a8a] hover:text-[#c77dff] text-xs font-cinzel uppercase tracking-wider transition-colors px-3">
@@ -124,12 +120,12 @@ export function Footer() {
             Privacy
           </Link>
           <span className="text-[#3a4a5a]">|</span>
-          <Link href="/dmca" className="text-[#6a7a8a] hover:text-[#c77dff] text-xs font-cinzel uppercase tracking-wider transition-colors px-3">
-            DMCA
+          <Link href="/store" className="text-[#6a7a8a] hover:text-[#c77dff] text-xs font-cinzel uppercase tracking-wider transition-colors px-3">
+            Store
           </Link>
           <span className="text-[#3a4a5a]">|</span>
-          <Link href="/submit" className="text-[#6a7a8a] hover:text-[#c77dff] text-xs font-cinzel uppercase tracking-wider transition-colors px-3">
-            Submit Server
+          <Link href="/wiki" className="text-[#6a7a8a] hover:text-[#c77dff] text-xs font-cinzel uppercase tracking-wider transition-colors px-3">
+            Wiki
           </Link>
           <span className="text-[#3a4a5a]">|</span>
           <Link href="/contact" className="text-[#6a7a8a] hover:text-[#c77dff] text-xs font-cinzel uppercase tracking-wider transition-colors px-3">
@@ -140,7 +136,7 @@ export function Footer() {
         {/* Copyright */}
         <div className="text-center space-y-1">
           <p className="text-[#4a5a6a] text-xs font-cinzel">
-            ©2025 HYTALEHIGHLIGHTS. ALL RIGHTS RESERVED.
+            ©2025 RIVEN REALMS. ALL RIGHTS RESERVED.
           </p>
           <p className="text-[#3a4a5a] text-xs">
             Not affiliated with Hypixel Studios or Hytale. All trademarks are the properties of their respective owners.

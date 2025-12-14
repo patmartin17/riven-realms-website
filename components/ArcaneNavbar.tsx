@@ -58,7 +58,7 @@ export function ArcaneNavbar() {
               </div>
             </div>
             <span className="hidden sm:block font-cinzel font-bold text-lg text-foreground group-hover:text-[#c77dff] transition-colors duration-300">
-              HytaleHighlights
+              Riven Realms
             </span>
           </Link>
 

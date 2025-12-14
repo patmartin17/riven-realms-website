@@ -1,10 +1,9 @@
 import type { Metadata } from "next"
 import type { ReactNode } from "react"
-import { Cinzel, MedievalSharp } from "next/font/google"
+import { Cinzel, MedievalSharp, Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 import { Analytics } from "@vercel/analytics/next"
-import { MainLayout } from "@/components/MainLayout"
 import "./globals.css"
 
 const cinzel = Cinzel({
@@ -25,15 +24,24 @@ const medievalsharp = MedievalSharp({
   fallback: ["cursive", "serif"],
 })
 
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+  preload: true,
+  fallback: ["system-ui", "sans-serif"],
+})
+
 export const metadata: Metadata = {
   title: {
-    default: "HytaleHighlights",
-    template: "%s | HytaleHighlights",
+    default: "Riven Realms",
+    template: "%s | Riven Realms",
   },
-  description: "Discover and rank the best Hytale servers. Find your perfect community with detailed rankings, reviews, and server information.",
-  keywords: ["Hytale", "servers", "rankings", "gaming", "community", "multiplayer"],
-  authors: [{ name: "HytaleHighlights" }],
-  creator: "HytaleHighlights",
+  description: "Welcome to Riven Realms - A Hytale server featuring epic adventures, kingdoms, and magical realms. Join our community today!",
+  keywords: ["Hytale", "server", "Riven Realms", "gaming", "community", "multiplayer", "RPG", "adventure"],
+  authors: [{ name: "Riven Realms" }],
+  creator: "Riven Realms",
   icons: {
     icon: "/images/desktop/smalllogo.png",
     apple: "/images/desktop/smalllogo.png",
@@ -41,25 +49,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "HytaleHighlights",
-    title: "HytaleHighlights - Discover the Best Hytale Servers",
-    description: "Discover and rank the best Hytale servers. Find your perfect community with detailed rankings, reviews, and server information.",
+    siteName: "Riven Realms",
+    title: "Riven Realms - A Hytale Server",
+    description: "Welcome to Riven Realms - A Hytale server featuring epic adventures, kingdoms, and magical realms.",
     images: [
       {
         url: "/images/desktop/hero.jpeg",
         width: 1920,
         height: 1080,
-        alt: "HytaleHighlights",
+        alt: "Riven Realms",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "HytaleHighlights - Discover the Best Hytale Servers",
-    description: "Discover and rank the best Hytale servers. Find your perfect community.",
+    title: "Riven Realms - A Hytale Server",
+    description: "Welcome to Riven Realms - Epic adventures await in our Hytale server.",
     images: ["/images/desktop/hero.jpeg"],
   },
-  metadataBase: new URL("https://hytalehighlights.vercel.app"),
+  metadataBase: new URL("https://rivenrealms.com"),
 }
 
 export default function RootLayout({
@@ -69,16 +77,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${cinzel.variable} ${medievalsharp.variable} font-cinzel antialiased`}>
+      <body className={`${cinzel.variable} ${medievalsharp.variable} ${inter.variable} font-cinzel antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          <MainLayout>
-            {children}
-          </MainLayout>
+          {children}
           <Toaster />
         </ThemeProvider>
         <Analytics />

@@ -77,6 +77,7 @@ const config: Config = {
       fontFamily: {
         cinzel: ["var(--font-cinzel)", "serif"],
         medieval: ["var(--font-medievalsharp)", "cursive"],
+        inter: ["var(--font-inter)", "system-ui", "sans-serif"],
         sans: ["var(--font-cinzel)", "serif"],
       },
       spacing: {

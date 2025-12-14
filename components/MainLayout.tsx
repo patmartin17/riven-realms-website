@@ -1,8 +1,9 @@
 "use client"
 
 import type { ReactNode } from "react"
+import { useState } from "react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { Menu, X } from "lucide-react"
 import { Footer } from "@/components/Footer"
 
 type MainLayoutProps = {
@@ -10,6 +11,8 @@ type MainLayoutProps = {
 }
 
 export function MainLayout({ children }: MainLayoutProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-[#0d0618]">
       {/* Outer background pattern */}
@@ -24,72 +27,108 @@ export function MainLayout({ children }: MainLayoutProps) {
       </div>
 
       {/* Main ornate frame container */}
-      <div className="relative min-h-screen px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-6">
-        <div className="ornate-page-frame relative min-h-[calc(100vh-24px)] sm:min-h-[calc(100vh-32px)] md:min-h-[calc(100vh-48px)]">
+      <div className="relative min-h-screen px-3 py-2 sm:px-4 sm:py-2 md:px-8 md:py-3 lg:px-16 xl:px-24 2xl:px-32">
+        <div className="ornate-page-frame relative min-h-[calc(100vh-16px)] sm:min-h-[calc(100vh-16px)] md:min-h-[calc(100vh-24px)]">
           
-          {/* Corner decorations */}
-          <div className="corner-diamond top-left" />
-          <div className="corner-diamond top-right" />
-          <div className="corner-diamond bottom-left" />
-          <div className="corner-diamond bottom-right" />
+          {/* Corner decorations - hidden on mobile */}
+          <div className="corner-diamond top-left hidden md:block" />
+          <div className="corner-diamond top-right hidden md:block" />
+          <div className="corner-diamond bottom-left hidden md:block" />
+          <div className="corner-diamond bottom-right hidden md:block" />
           
-          {/* Top center diamond */}
-          <div className="center-diamond top" />
+          {/* Top center diamond - hidden on mobile */}
+          <div className="center-diamond top hidden md:block" />
           {/* Bottom center diamond */}
-          <div className="center-diamond bottom" />
+          <div className="center-diamond bottom hidden md:block" />
           
-          {/* Frame borders */}
-          <div className="frame-border top" />
-          <div className="frame-border bottom" />
-          <div className="frame-border left" />
-          <div className="frame-border right" />
+          {/* Frame borders - hidden on mobile */}
+          <div className="frame-border top hidden md:block" />
+          <div className="frame-border bottom hidden md:block" />
+          <div className="frame-border left hidden md:block" />
+          <div className="frame-border right hidden md:block" />
           
-          {/* Inner frame accent lines */}
-          <div className="frame-accent top" />
-          <div className="frame-accent bottom" />
-          <div className="frame-accent left" />
-          <div className="frame-accent right" />
-
-          {/* Side accents */}
-          <div className="side-accent left" />
-          <div className="side-accent right" />
+          {/* Inner frame accent lines - hidden on mobile */}
+          <div className="frame-accent top hidden md:block" />
+          <div className="frame-accent bottom hidden md:block" />
+          <div className="frame-accent left hidden md:block" />
+          <div className="frame-accent right hidden md:block" />
+          
+          {/* Side accents - hidden on mobile */}
+          <div className="side-accent left hidden md:block" />
+          <div className="side-accent right hidden md:block" />
 
           {/* Navbar inside frame */}
-          <nav className="relative z-20 flex items-center justify-between px-4 sm:px-8 py-4 border-b border-arcane-purple/20">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="text-[#c77dff] group-hover:text-[#e0c3fc] transition-colors">
-                <svg className="w-8 h-8 sm:w-10 sm:h-10" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L8 6H4v4l-4 4 4 4v4h4l4 4 4-4h4v-4l4-4-4-4V6h-4l-4-4zm0 3.5L14.5 8H16v1.5L18.5 12 16 14.5V16h-1.5L12 18.5 9.5 16H8v-1.5L5.5 12 8 9.5V8h1.5L12 5.5z"/>
-                </svg>
-              </div>
-              <span className="hidden sm:block font-cinzel font-bold text-lg text-foreground group-hover:text-[#c77dff] transition-colors">
-                HytaleHighlights
+          <nav className="relative z-20 flex items-center justify-between px-3 sm:px-4 md:px-8 h-[72px] border-b border-arcane-purple/20">
+            {/* Site Name - centered on mobile, left-aligned on desktop */}
+            <Link href="/" className="absolute left-1/2 -translate-x-1/2 md:relative md:left-0 md:translate-x-0 flex items-center group md:ml-[10px]">
+              <span className="font-cinzel text-base sm:text-lg md:text-xl font-bold text-foreground group-hover:text-[#c77dff] transition-colors tracking-wide translate-y-[2px]">
+                Riven Realms
               </span>
             </Link>
 
             {/* Nav Links */}
             <div className="hidden md:flex items-center gap-6 lg:gap-8">
-              {["Home", "Server", "Rules", "Store", "Staff", "Forums", "Discord"].map((item) => (
+              {["Home", "About", "Wiki", "Store", "Forums", "Discord"].map((item) => (
                 <Link
                   key={item}
                   href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                  className="font-cinzel text-sm font-medium text-foreground/70 hover:text-[#c77dff] transition-colors relative group"
+                  className="font-cinzel text-sm font-medium text-foreground/70 hover:text-[#c77dff] transition-colors relative group flex items-center"
                 >
-                  {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-[#c77dff] group-hover:w-full transition-all duration-300" />
+                  <span className="relative z-10 translate-y-[2px]">{item}</span>
+                  <span className="absolute bottom-0 left-0 w-0 h-px bg-[#c77dff] group-hover:w-full transition-all duration-300" />
                 </Link>
               ))}
             </div>
 
-            {/* Join Button - Custom Image */}
-            <Link href="/join" className="join-button-wrapper mr-4 sm:mr-8">
-              <img 
-                src="/images/desktop/join.png" 
-                alt="Join Now" 
-                className="join-button"
-              />
-            </Link>
+            {/* Join Button - Custom Image moved more to the left - HIDDEN ON MOBILE */}
+            <div className="flex items-center gap-2 sm:gap-4 mr-2 sm:mr-4 md:mr-6 lg:mr-8">
+              <Link href="/join" className="join-button-wrapper !hidden md:!flex items-center">
+                <img 
+                  src="/images/desktop/join.png" 
+                  alt="Join Now" 
+                  className="join-button"
+                />
+              </Link>
+
+              {/* Mobile Menu Button */}
+              <button
+                className="md:hidden text-foreground hover:text-[#c77dff] transition-colors p-1 flex items-center"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
+            </div>
+
+            {/* Mobile Navigation Menu */}
+            {isMobileMenuOpen && (
+              <>
+                {/* Backdrop overlay */}
+                <div 
+                  className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[55] md:hidden"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                />
+                {/* Menu dropdown */}
+                <div className="absolute top-full left-0 right-0 z-[60] bg-[#0d0618]/98 backdrop-blur-md border-b border-arcane-purple/30 md:hidden shadow-lg">
+                  <div className="flex flex-col p-4 space-y-3">
+                    {["Home", "About", "Wiki", "Store", "Forums", "Discord"].map((item) => (
+                      <Link
+                        key={item}
+                        href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                        className="font-cinzel text-base font-medium text-foreground/80 hover:text-[#c77dff] hover:bg-arcane-purple/10 px-4 py-3 rounded-md transition-all"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {item}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
           </nav>
 
           {/* Main content area */}

@@ -4,34 +4,38 @@
 
 @layer base {
   :root {
-    /* Arcane Mystic Theme - Purple Dominant */
-    --background: 270 50% 4%; /* Deep void */
-    --foreground: 270 30% 90%; /* Light purple-white */
+    /* Arcane Mystic Theme - Deep Slate & Gold Contrast */
+    /* Shifted from pure purple to deep slate for better readability */
+    --background: 240 25% 6%; /* Void Slate */
+    --foreground: 240 20% 90%; /* Slate White */
     
-    --card: 270 40% 8%;
-    --card-foreground: 270 30% 90%;
+    /* Slightly lighter slate for cards to separate from background */
+    --card: 240 20% 9%;
+    --card-foreground: 240 20% 90%;
     
-    --popover: 270 45% 6%;
-    --popover-foreground: 270 30% 90%;
+    --popover: 240 25% 7%;
+    --popover-foreground: 240 20% 90%;
     
-    --primary: 275 70% 55%; /* Runic Purple */
-    --primary-foreground: 270 50% 95%;
+    /* Kept Runic Purple as primary but it pops more against slate */
+    --primary: 270 60% 55%; 
+    --primary-foreground: 240 20% 95%;
     
-    --secondary: 280 60% 45%; /* Deeper Purple */
-    --secondary-foreground: 270 30% 90%;
+    --secondary: 260 40% 40%; /* Desaturated Purple */
+    --secondary-foreground: 240 20% 90%;
     
-    --muted: 270 30% 15%;
-    --muted-foreground: 270 20% 60%;
+    --muted: 240 20% 15%;
+    --muted-foreground: 240 15% 60%;
     
-    --accent: 51 100% 50%; /* Magic Gold */
-    --accent-foreground: 270 50% 4%;
+    /* Enhanced Gold for better contrast accents */
+    --accent: 45 90% 55%; /* Rich Magic Gold */
+    --accent-foreground: 240 30% 10%;
     
     --destructive: 0 70% 50%;
-    --destructive-foreground: 270 30% 90%;
+    --destructive-foreground: 240 20% 90%;
     
-    --border: 275 50% 30%;
-    --input: 275 50% 25%;
-    --ring: 275 70% 55%;
+    --border: 240 20% 20%;
+    --input: 240 20% 20%;
+    --ring: 270 60% 55%;
     
     --radius: 0.5rem;
     
@@ -40,8 +44,8 @@
   }
 
   .dark {
-    --background: 270 50% 4%;
-    --foreground: 270 30% 90%;
+    --background: 240 25% 6%;
+    --foreground: 240 20% 90%;
   }
 }
 
@@ -52,12 +56,23 @@
   
   body {
     @apply bg-void text-foreground font-cinzel;
+    background-color: #0a0515;
     background-image: 
+      /* Subtle noise texture overlay */
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"),
       /* Purple nebula gradient */
-      radial-gradient(ellipse at top left, rgba(157, 78, 221, 0.25) 0%, transparent 50%),
-      radial-gradient(ellipse at top right, rgba(138, 43, 226, 0.2) 0%, transparent 40%),
-      radial-gradient(ellipse at bottom left, rgba(75, 0, 130, 0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at bottom center, rgba(157, 78, 221, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at top left, rgba(157, 78, 221, 0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at top right, rgba(138, 43, 226, 0.15) 0%, transparent 40%),
+      radial-gradient(ellipse at bottom left, rgba(75, 0, 130, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom center, rgba(157, 78, 221, 0.1) 0%, transparent 50%),
+      /* Subtle diagonal lines texture */
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(157, 78, 221, 0.02) 2px,
+        rgba(157, 78, 221, 0.02) 4px
+      ),
       radial-gradient(ellipse at center, rgba(25, 10, 50, 1) 0%, rgba(10, 5, 20, 1) 100%);
     background-attachment: fixed;
     min-height: 100vh;
@@ -524,6 +539,7 @@
   @apply arcane-title text-2xl mb-6;
 }
 
+
 /* ========================================
    JOIN BUTTON STYLES
    ======================================== */
@@ -535,7 +551,7 @@
 }
 
 .join-button {
-  height: 36px;
+  height: 48px;
   width: auto;
   display: block;
   transition: all 0.2s ease;
@@ -813,4 +829,252 @@
   border-top-color: rgba(157, 78, 221, 0.4);
   border-right-color: rgba(157, 78, 221, 0.4);
   border-top-right-radius: 12px;
+}
+
+/* ========================================
+   HERO LOGO EFFECTS
+   ======================================== */
+
+.hero-logo-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Main logo animation - very slow gentle float */
+.hero-logo {
+  animation: heroLogoFloat 12s ease-in-out infinite;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4))
+          drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5))
+          drop-shadow(0 0 80px rgba(157, 78, 221, 0.4))
+          drop-shadow(0 0 120px rgba(157, 78, 221, 0.25));
+}
+
+@keyframes heroLogoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Glow ring behind logo */
+.hero-logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(157, 78, 221, 0.2) 0%,
+    rgba(157, 78, 221, 0.08) 30%,
+    transparent 70%
+  );
+  animation: heroGlowPulse 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes heroGlowPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+/* Shine sweep effect - contained to logo shape */
+.hero-logo-shine {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 20;
+  /* Use the logo as a mask so shine only shows on the logo */
+  -webkit-mask-image: url('/images/desktop/logo.png');
+  mask-image: url('/images/desktop/logo.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.hero-logo-shine::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 45%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.15) 55%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  animation: heroShine 12s ease-in-out infinite;
+}
+
+@keyframes heroShine {
+  0% {
+    left: -100%;
+  }
+  8% {
+    left: 200%;
+  }
+  8.01%, 100% {
+    left: 200%;
+  }
+}
+
+/* Particle container */
+.hero-particles {
+  position: absolute;
+  inset: -50%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Individual particles */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(199, 125, 255, 0.8) 0%, rgba(157, 78, 221, 0.5) 50%, transparent 100%);
+  border-radius: 50%;
+  animation: particleFloat 16s ease-in-out infinite;
+}
+
+.particle::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(circle, rgba(199, 125, 255, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+/* Different particle positions and timings */
+.particle-1 {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 14s;
+}
+
+.particle-2 {
+  top: 60%;
+  left: 5%;
+  animation-delay: -2s;
+  animation-duration: 18s;
+  width: 3px;
+  height: 3px;
+}
+
+.particle-3 {
+  top: 30%;
+  right: 15%;
+  animation-delay: -4s;
+  animation-duration: 16s;
+}
+
+.particle-4 {
+  top: 70%;
+  right: 10%;
+  animation-delay: -6s;
+  animation-duration: 12s;
+  width: 5px;
+  height: 5px;
+}
+
+.particle-5 {
+  top: 10%;
+  left: 40%;
+  animation-delay: -8s;
+  animation-duration: 20s;
+  width: 3px;
+  height: 3px;
+}
+
+.particle-6 {
+  bottom: 20%;
+  left: 25%;
+  animation-delay: -5s;
+  animation-duration: 15s;
+}
+
+.particle-7 {
+  top: 45%;
+  right: 25%;
+  animation-delay: -3s;
+  animation-duration: 17s;
+  width: 3px;
+  height: 3px;
+}
+
+.particle-8 {
+  bottom: 30%;
+  right: 30%;
+  animation-delay: -7s;
+  animation-duration: 19s;
+  width: 4px;
+  height: 4px;
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.4;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) scale(1.1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-8px) translateX(-8px) scale(0.9);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateY(-25px) translateX(5px) scale(1.05);
+    opacity: 0.6;
+  }
+}
+
+/* Subtle sparkle effect - small dots around the logo */
+.hero-logo-container::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background-image: 
+    radial-gradient(2px 2px at 15% 25%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(2px 2px at 85% 30%, rgba(199, 125, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 70% 15%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(2px 2px at 25% 75%, rgba(199, 125, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 90% 70%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(2px 2px at 10% 85%, rgba(199, 125, 255, 0.5), transparent);
+  background-size: 100% 100%;
+  animation: sparkle 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.02);
+  }
 }
