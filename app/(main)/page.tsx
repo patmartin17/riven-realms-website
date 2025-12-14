@@ -74,6 +74,14 @@ export default function Home() {
                 <div className="particle particle-6" />
                 <div className="particle particle-7" />
                 <div className="particle particle-8" />
+                <div className="particle particle-9" />
+                <div className="particle particle-10" />
+                <div className="particle particle-11" />
+                <div className="particle particle-12" />
+                <div className="particle particle-13" />
+                <div className="particle particle-14" />
+                <div className="particle particle-15" />
+                <div className="particle particle-16" />
               </div>
               
               {/* Glow ring behind logo */}
@@ -121,7 +129,7 @@ export default function Home() {
           {/* Empty cover with shadow and content inside */}
           <div className="relative drop-shadow-[0_25px_50px_rgba(0,0,0,0.5)] overflow-hidden">
             {/* White content section BEHIND the frame - properly contained within image */}
-            <div className="absolute inset-x-[8%] top-[12%] bottom-[48%] sm:top-[10%] sm:bottom-[46%] md:top-[calc(12%-50px)] md:bottom-[calc(52%-50px)] bg-gradient-to-b from-[#f8f6f3] via-[#f5f3ef] to-[#f0ede8] rounded-sm overflow-hidden z-0">
+            <div className="absolute inset-x-[8%] top-[8%] bottom-[48%] sm:top-[9%] sm:bottom-[46%] md:top-[calc(12%-50px)] md:bottom-[calc(52%-50px)] bg-gradient-to-b from-[#f8f6f3] via-[#f5f3ef] to-[#f0ede8] rounded-sm overflow-hidden z-0">
               {/* Subtle texture overlay */}
               <div className="absolute inset-0 opacity-30" style={{
                 backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`

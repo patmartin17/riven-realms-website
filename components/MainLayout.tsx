@@ -80,9 +80,9 @@ export function MainLayout({ children }: MainLayoutProps) {
               ))}
             </div>
 
-            {/* Join Button - Custom Image moved more to the left - HIDDEN ON MOBILE */}
+            {/* Join Button - Custom Image moved more to the left - HIDDEN BELOW 900px */}
             <div className="flex items-center gap-2 sm:gap-4 mr-2 sm:mr-4 md:mr-6 lg:mr-8">
-              <Link href="/join" className="join-button-wrapper !hidden md:!flex items-center">
+              <Link href="/join" className="join-button-wrapper !hidden min-[900px]:!flex items-center">
                 <img 
                   src="/images/desktop/join.png" 
                   alt="Join Now" 

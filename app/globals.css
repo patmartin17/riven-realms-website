@@ -941,9 +941,10 @@
 /* Particle container */
 .hero-particles {
   position: absolute;
-  inset: -50%;
+  inset: -60%;
   pointer-events: none;
   z-index: 5;
+  filter: blur(0.3px);
 }
 
 /* Individual particles */
@@ -951,17 +952,32 @@
   position: absolute;
   width: 4px;
   height: 4px;
-  background: radial-gradient(circle, rgba(199, 125, 255, 0.8) 0%, rgba(157, 78, 221, 0.5) 50%, transparent 100%);
+  background: radial-gradient(circle, rgba(199, 125, 255, 1) 0%, rgba(157, 78, 221, 0.8) 40%, rgba(138, 43, 226, 0.4) 70%, transparent 100%);
   border-radius: 50%;
   animation: particleFloat 16s ease-in-out infinite;
+  box-shadow: 
+    0 0 6px rgba(199, 125, 255, 0.8),
+    0 0 12px rgba(157, 78, 221, 0.5),
+    0 0 20px rgba(138, 43, 226, 0.3);
+  filter: blur(0.5px);
 }
 
 .particle::after {
   content: "";
   position: absolute;
-  inset: -2px;
-  background: radial-gradient(circle, rgba(199, 125, 255, 0.3) 0%, transparent 70%);
+  inset: -3px;
+  background: radial-gradient(circle, rgba(199, 125, 255, 0.5) 0%, transparent 60%);
   border-radius: 50%;
+  animation: particlePulse 3s ease-in-out infinite;
+}
+
+.particle::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 50%);
+  border-radius: 50%;
+  animation: particleTwinkle 2s ease-in-out infinite;
 }
 
 /* Different particle positions and timings */
@@ -1031,22 +1047,114 @@
   height: 4px;
 }
 
+.particle-9 {
+  top: 15%;
+  left: 50%;
+  animation-delay: -1s;
+  animation-duration: 13s;
+  width: 5px;
+  height: 5px;
+}
+
+.particle-10 {
+  top: 55%;
+  left: 20%;
+  animation-delay: -3.5s;
+  animation-duration: 21s;
+  width: 3px;
+  height: 3px;
+}
+
+.particle-11 {
+  top: 25%;
+  right: 5%;
+  animation-delay: -5.5s;
+  animation-duration: 15s;
+  width: 4px;
+  height: 4px;
+}
+
+.particle-12 {
+  bottom: 15%;
+  left: 45%;
+  animation-delay: -2.5s;
+  animation-duration: 18s;
+  width: 6px;
+  height: 6px;
+}
+
+.particle-13 {
+  top: 50%;
+  left: 15%;
+  animation-delay: -4.5s;
+  animation-duration: 22s;
+  width: 3px;
+  height: 3px;
+}
+
+.particle-14 {
+  top: 35%;
+  right: 35%;
+  animation-delay: -6.5s;
+  animation-duration: 14s;
+  width: 4px;
+  height: 4px;
+}
+
+.particle-15 {
+  bottom: 25%;
+  right: 20%;
+  animation-delay: -1.5s;
+  animation-duration: 17s;
+  width: 5px;
+  height: 5px;
+}
+
+.particle-16 {
+  top: 65%;
+  left: 35%;
+  animation-delay: -8.5s;
+  animation-duration: 20s;
+  width: 3px;
+  height: 3px;
+}
+
 @keyframes particleFloat {
   0%, 100% {
-    transform: translateY(0) translateX(0) scale(1);
-    opacity: 0.4;
+    transform: translateY(0) translateX(0) scale(1) rotate(0deg);
+    opacity: 0.6;
   }
   25% {
-    transform: translateY(-20px) translateX(10px) scale(1.1);
-    opacity: 0.7;
+    transform: translateY(-25px) translateX(15px) scale(1.2) rotate(90deg);
+    opacity: 1;
   }
   50% {
-    transform: translateY(-8px) translateX(-8px) scale(0.9);
-    opacity: 0.5;
+    transform: translateY(-10px) translateX(-12px) scale(0.8) rotate(180deg);
+    opacity: 0.7;
   }
   75% {
-    transform: translateY(-25px) translateX(5px) scale(1.05);
-    opacity: 0.6;
+    transform: translateY(-30px) translateX(8px) scale(1.1) rotate(270deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes particlePulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes particleTwinkle {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.8;
   }
 }
 
