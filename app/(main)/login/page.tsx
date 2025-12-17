@@ -1,26 +1,60 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Eye, EyeOff, ArrowRight, Lock, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { signInUser } from "@/lib/firebase/auth"
+import { useAuth } from "@/lib/firebase"
+import { toast } from "sonner"
 
 export default function LoginPage() {
   const router = useRouter()
+  const { user } = useAuth()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      router.push("/")
+    }
+  }, [user, router])
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    // TODO: Implement actual authentication
-    setTimeout(() => {
-      setIsLoading(false)
+
+    try {
+      await signInUser(email, password)
+      toast.success("Welcome back!", {
+        description: "You have been successfully logged in.",
+      })
       router.push("/")
-    }, 800)
+    } catch (error: any) {
+      let errorMessage = "Failed to sign in. Please try again."
+      
+      if (error.message.includes("user-not-found")) {
+        errorMessage = "No account found with this email address."
+      } else if (error.message.includes("wrong-password")) {
+        errorMessage = "Incorrect password. Please try again."
+      } else if (error.message.includes("invalid-email")) {
+        errorMessage = "Invalid email address."
+      } else if (error.message.includes("too-many-requests")) {
+        errorMessage = "Too many failed attempts. Please try again later."
+      } else if (error.message) {
+        errorMessage = error.message
+      }
+
+      toast.error("Sign in failed", {
+        description: errorMessage,
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (

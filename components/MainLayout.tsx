@@ -4,6 +4,7 @@ import type { ReactNode } from "react"
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { Menu, X, LogIn, LogOut, UserPlus, Copy, Check } from "lucide-react"
 import { Footer } from "@/components/Footer"
 import {
@@ -14,18 +15,40 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import { useAuth } from "@/lib/firebase"
+import { signOutUser } from "@/lib/firebase/auth"
+import { toast } from "sonner"
 
 type MainLayoutProps = {
   children: ReactNode
 }
 
 export function MainLayout({ children }: MainLayoutProps) {
+  const router = useRouter()
+  const { user } = useAuth()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false) // TODO: Replace with actual auth state
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
   
   const serverSubdomain = "riven.gg"
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true)
+    try {
+      await signOutUser()
+      toast.success("Logged out", {
+        description: "You have been successfully logged out.",
+      })
+      router.push("/")
+    } catch (error: any) {
+      toast.error("Logout failed", {
+        description: error.message || "Failed to log out. Please try again.",
+      })
+    } finally {
+      setIsLoggingOut(false)
+    }
+  }
 
   const handleCopyServer = async () => {
     try {
@@ -55,7 +78,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         {/* Auth Buttons - Above navbar, aligned with content edge, centered vertically */}
         <div className="relative z-30 flex justify-end items-center h-10 mb-2">
           <div className="flex items-center gap-1.5 sm:gap-2">
-            {isLoggedIn ? (
+            {user ? (
               <>
                 <Link
                   href="/profile"
@@ -64,11 +87,21 @@ export function MainLayout({ children }: MainLayoutProps) {
                   Profile
                 </Link>
                 <button
-                  onClick={() => setIsLoggedIn(false)}
-                  className="font-cinzel text-[10px] sm:text-xs text-foreground/70 hover:text-[#c77dff] transition-colors px-1.5 sm:px-2 py-0.5 rounded hover:bg-arcane-purple/10 flex items-center gap-1"
+                  onClick={handleLogout}
+                  disabled={isLoggingOut}
+                  className="font-cinzel text-[10px] sm:text-xs text-foreground/70 hover:text-[#c77dff] transition-colors px-1.5 sm:px-2 py-0.5 rounded hover:bg-arcane-purple/10 flex items-center gap-1 disabled:opacity-50"
                 >
-                  <LogOut className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-                  <span className="hidden sm:inline">Logout</span>
+                  {isLoggingOut ? (
+                    <>
+                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 border-2 border-foreground/30 border-t-foreground/70 rounded-full animate-spin" />
+                      <span className="hidden sm:inline">Logging out...</span>
+                    </>
+                  ) : (
+                    <>
+                      <LogOut className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                      <span className="hidden sm:inline">Logout</span>
+                    </>
+                  )}
                 </button>
               </>
             ) : (

@@ -1,13 +1,17 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Eye, EyeOff, ArrowRight, Lock, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { registerUser } from "@/lib/firebase/auth"
+import { useAuth } from "@/lib/firebase"
+import { toast } from "sonner"
 
 export default function RegisterPage() {
   const router = useRouter()
+  const { user } = useAuth()
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -17,20 +21,57 @@ export default function RegisterPage() {
     confirmPassword: "",
   })
 
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      router.push("/")
+    }
+  }, [user, router])
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
     
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match")
+      toast.error("Passwords do not match", {
+        description: "Please make sure both passwords are the same.",
+      })
+      return
+    }
+
+    if (formData.password.length < 6) {
+      toast.error("Password too short", {
+        description: "Password must be at least 6 characters long.",
+      })
       return
     }
 
     setIsLoading(true)
-    // TODO: Implement actual registration
-    setTimeout(() => {
-      setIsLoading(false)
+
+    try {
+      await registerUser(formData.email, formData.password)
+      toast.success("Account created!", {
+        description: "Your account has been successfully created. You can now sign in.",
+      })
       router.push("/login")
-    }, 800)
+    } catch (error: any) {
+      let errorMessage = "Failed to create account. Please try again."
+      
+      if (error.message.includes("email-already-in-use")) {
+        errorMessage = "An account with this email already exists. Please sign in instead."
+      } else if (error.message.includes("invalid-email")) {
+        errorMessage = "Invalid email address."
+      } else if (error.message.includes("weak-password")) {
+        errorMessage = "Password is too weak. Please choose a stronger password."
+      } else if (error.message) {
+        errorMessage = error.message
+      }
+
+      toast.error("Registration failed", {
+        description: errorMessage,
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

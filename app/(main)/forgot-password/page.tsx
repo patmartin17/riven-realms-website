@@ -13,11 +13,28 @@ export default function ForgotPasswordPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    // TODO: Implement actual password reset request
-    setTimeout(() => {
-      setIsLoading(false)
+    
+    try {
+      const { resetPassword } = await import("@/lib/firebase/auth")
+      await resetPassword(email)
       setIsSubmitted(true)
-    }, 800)
+    } catch (error: any) {
+      let errorMessage = "Failed to send reset email. Please try again."
+      
+      if (error.message.includes("user-not-found")) {
+        errorMessage = "No account found with this email address."
+      } else if (error.message.includes("invalid-email")) {
+        errorMessage = "Invalid email address."
+      } else if (error.message) {
+        errorMessage = error.message
+      }
+
+      const { toast } = await import("sonner")
+      toast.error("Reset failed", {
+        description: errorMessage,
+      })
+      setIsLoading(false)
+    }
   }
 
   if (isSubmitted) {
