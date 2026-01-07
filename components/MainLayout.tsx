@@ -138,14 +138,27 @@ export function MainLayout({ children }: MainLayoutProps) {
             {/* Nav Links */}
             <div className="hidden md:flex items-center gap-6 lg:gap-8">
               {["Home", "About", "Wiki", "Store", "Forums", "Discord"].map((item) => (
-                <Link
-                  key={item}
-                  href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                  className="font-cinzel text-sm font-medium text-foreground/70 hover:text-[#c77dff] transition-colors relative group flex items-center"
-                >
-                  <span className="relative z-10 translate-y-[2px]">{item}</span>
-                  <span className="absolute bottom-0 left-0 w-0 h-px bg-[#c77dff] group-hover:w-full transition-all duration-300" />
-                </Link>
+                item === "Discord" ? (
+                  <a
+                    key={item}
+                    href="https://discord.com/invite/FMm9cBx3YU"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-cinzel text-sm font-medium text-foreground/70 hover:text-[#c77dff] transition-colors relative group flex items-center"
+                  >
+                    <span className="relative z-10 translate-y-[2px]">{item}</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-[#c77dff] group-hover:w-full transition-all duration-300" />
+                  </a>
+                ) : (
+                  <Link
+                    key={item}
+                    href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                    className="font-cinzel text-sm font-medium text-foreground/70 hover:text-[#c77dff] transition-colors relative group flex items-center"
+                  >
+                    <span className="relative z-10 translate-y-[2px]">{item}</span>
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-[#c77dff] group-hover:w-full transition-all duration-300" />
+                  </Link>
+                )
               ))}
             </div>
 
@@ -188,14 +201,27 @@ export function MainLayout({ children }: MainLayoutProps) {
                 <div className="absolute top-full left-0 right-0 z-[60] bg-[#0d0618]/98 backdrop-blur-md border-b border-arcane-purple/30 md:hidden shadow-lg">
                   <div className="flex flex-col p-4 space-y-3">
                     {["Home", "About", "Wiki", "Store", "Forums", "Discord"].map((item) => (
-                      <Link
-                        key={item}
-                        href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                        className="font-cinzel text-base font-medium text-foreground/80 hover:text-[#c77dff] hover:bg-arcane-purple/10 px-4 py-3 rounded-md transition-all"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        {item}
-                      </Link>
+                      item === "Discord" ? (
+                        <a
+                          key={item}
+                          href="https://discord.com/invite/FMm9cBx3YU"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-cinzel text-base font-medium text-foreground/80 hover:text-[#c77dff] hover:bg-arcane-purple/10 px-4 py-3 rounded-md transition-all"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {item}
+                        </a>
+                      ) : (
+                        <Link
+                          key={item}
+                          href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                          className="font-cinzel text-base font-medium text-foreground/80 hover:text-[#c77dff] hover:bg-arcane-purple/10 px-4 py-3 rounded-md transition-all"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {item}
+                        </Link>
+                      )
                     ))}
                   </div>
                 </div>

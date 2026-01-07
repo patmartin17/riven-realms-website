@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Users, User, Shield, Heart, MessageSquare, Mail, Sword, Castle, Sparkles, Star } from "lucide-react"
+import { Users, User, Shield, Heart, Mail, Sword, Castle, Sparkles, Star } from "lucide-react"
 
 export const metadata = {
   title: "About Us",
@@ -9,40 +9,34 @@ export const metadata = {
 }
 
 const teamMembers = [
-  { name: "Alex Storm", role: "Server Owner", icon: User },
-  { name: "Sarah Knight", role: "Community Manager", icon: Users },
-  { name: "Mike Dragon", role: "Lead Builder", icon: Castle },
-  { name: "Luna Frost", role: "Developer", icon: Sparkles },
+  { name: "Ascari", role: "Community Manager", icon: Users },
+  { name: "Juuaan", role: "Lead Builder", icon: Castle },
+  { name: "Maax", role: "Server Manager", icon: User },
+  { name: "Patt", role: "Lead Developer", icon: Sparkles },
+  { name: "Sourr", role: "Staff Manager", icon: Shield },
 ]
 
 const values = [
   {
     icon: Heart,
     title: "Community First",
-    description: "Our players are the heart of Riven Realms. Every decision we make considers our community's experience and enjoyment.",
+    description: "Our players will be the heart of Riven Realms. Every decision we make will consider our community's experience and enjoyment.",
   },
   {
     icon: Shield,
     title: "Fair Play",
-    description: "We maintain a balanced, fair environment. Pay-to-win doesn't exist here - skill and dedication determine success.",
+    description: "We will maintain a balanced, fair environment. Pay-to-win won't exist here. Skill and dedication will determine success.",
   },
   {
     icon: Sword,
     title: "Epic Adventures",
-    description: "We're committed to delivering unique, memorable experiences. From custom dungeons to world events, adventure awaits.",
+    description: "We're committed to delivering unique, memorable experiences. From custom dungeons to world events, adventure will await.",
   },
   {
     icon: Star,
     title: "Constant Evolution",
-    description: "Riven Realms is always growing. We regularly add new content, features, and improvements based on player feedback.",
+    description: "Riven Realms will always be growing. We will regularly add new content, features, and improvements based on player feedback.",
   },
-]
-
-const milestones = [
-  { year: "2024", event: "Riven Realms founded" },
-  { year: "2024", event: "First 500 players joined" },
-  { year: "2025", event: "Kingdoms system launched" },
-  { year: "2025", event: "Community reached 5,000 members" },
 ]
 
 export default function AboutPage() {
@@ -55,7 +49,7 @@ export default function AboutPage() {
             About Riven Realms
           </h1>
           <p className="text-foreground/60 max-w-2xl mx-auto">
-            Discover the story behind the realm and the passionate team bringing it to life.
+            Learn about our vision for Riven Realms and the passionate team working to bring it to life.
           </p>
         </div>
 
@@ -68,17 +62,17 @@ export default function AboutPage() {
               <div className="space-y-4 text-foreground/70">
                 <p>
                   Riven Realms began as a dream shared by a group of passionate gamers who wanted to create 
-                  something special in the Hytale universe. We envisioned a server where epic adventures, 
-                  meaningful player interactions, and creative freedom would come together.
+                  something special in the Hytale universe. We envision a server where epic adventures, 
+                  meaningful player interactions, and creative freedom will come together.
                 </p>
                 <p>
-                  Today, Riven Realms is home to thousands of players who explore our custom-built world, 
-                  forge alliances, build kingdoms, and create stories that will be remembered for years to come. 
-                  Our dedicated team works tirelessly to ensure every player has an unforgettable experience.
+                  Our dedicated team is working tirelessly to build a custom world where players will explore 
+                  vast realms, forge alliances, build kingdoms, and create stories that will be remembered for years to come. 
+                  We're crafting an experience where every player will have the opportunity for unforgettable adventures.
                 </p>
                 <p>
-                  Whether you're a seasoned adventurer or just starting your journey, there's a place for 
-                  you in Riven Realms. Welcome to our community.
+                  Whether you're a seasoned adventurer or just starting your journey, there will be a place for 
+                  you in Riven Realms. We're building this community for players like you.
                 </p>
               </div>
             </div>
@@ -109,7 +103,7 @@ export default function AboutPage() {
         {/* Team */}
         <section>
           <h2 className="text-2xl font-cinzel font-bold text-foreground mb-8 text-center">Meet the Team</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {teamMembers.map((member) => (
               <Card key={member.name} className="text-center py-8">
                 <CardContent className="p-0">
@@ -124,23 +118,6 @@ export default function AboutPage() {
               </Card>
             ))}
           </div>
-        </section>
-
-        {/* Timeline */}
-        <section>
-          <h2 className="text-2xl font-cinzel font-bold text-foreground mb-8 text-center">Our Journey</h2>
-          <Card className="p-8">
-            <div className="space-y-6">
-              {milestones.map((milestone, index) => (
-                <div key={index} className="flex items-center gap-6 group">
-                  <div className="w-20 text-[#c77dff] font-bold font-cinzel text-lg text-right">{milestone.year}</div>
-                  <div className="w-3 h-3 rounded-full bg-arcane-purple/30 border-2 border-arcane-purple/50 group-hover:bg-[#c77dff] group-hover:border-[#c77dff] transition-colors flex-shrink-0" />
-                  <div className="flex-1 h-px bg-arcane-purple/20 group-hover:bg-[#c77dff]/30 transition-colors" />
-                  <div className="text-foreground/70 flex-1">{milestone.event}</div>
-                </div>
-              ))}
-            </div>
-          </Card>
         </section>
 
         {/* Contact CTA */}
@@ -164,7 +141,7 @@ export default function AboutPage() {
                   <Link href="/contact">Contact Us</Link>
                 </Button>
                 <Button variant="outline" asChild>
-                  <Link href="/discord">Join Discord</Link>
+                  <a href="https://discord.com/invite/FMm9cBx3YU" target="_blank" rel="noopener noreferrer">Join Discord</a>
                 </Button>
               </div>
             </div>
