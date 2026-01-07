@@ -146,7 +146,7 @@ export default function WikiPage() {
               return (
                 <Link
                   key={link.name}
-                  href={link.href}
+                  href={link.href || "#"}
                   className="block group"
                 >
                   <Card className="text-center py-6 h-full hover:border-[#c77dff]/50 transition-all cursor-pointer">
