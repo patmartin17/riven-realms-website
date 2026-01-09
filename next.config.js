@@ -14,10 +14,10 @@ const nextConfig = {
   // Remove X-Powered-By header for security
   poweredByHeader: false,
   
-  // Turbopack configuration
-  turbopack: {
-    root: "/home/pmartin/newtestsite",
-  },
+  // // Turbopack configuration
+  // turbopack: {
+  //   root: "/home/pmartin/newtestsite",
+  // },
 }
 
 module.exports = nextConfig
